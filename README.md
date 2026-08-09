@@ -125,12 +125,12 @@ pnpm install
 
 Run:
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Build:
 ```bash
-npm run build
+pnpm run build
 ```
 
 # Project Structure
