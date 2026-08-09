@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jianli.dalaobb.com/sitemap.xml
+Sitemap: https://resume.dalaobb.com/sitemap.xml
