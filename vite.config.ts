@@ -8,4 +8,13 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5173,
   },
+  build: {
+    rollupOptions: {
+      input: {
+        home: 'index.html',
+        create: 'create.html',
+        privacy: 'privacy.html',
+      },
+    },
+  },
 })

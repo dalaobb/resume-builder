@@ -30,12 +30,10 @@ export function translate(lang: Lang, path: string, vars?: Record<string, string
 
 export function useI18n() {
   const lang = useResumeStore((s) => s.lang)
-  const setLang = useResumeStore((s) => s.setLang)
   const msg = messages[lang]
 
   return {
     lang,
-    setLang,
     msg,
     t: (path: string, vars?: Record<string, string | number>) => translate(lang, path, vars),
   }

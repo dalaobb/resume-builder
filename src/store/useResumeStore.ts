@@ -6,6 +6,8 @@ import { detectLanguage } from '../utils/language'
 
 const STORAGE_KEY = 'resume-maker'
 
+const PRERENDER_LANG = (globalThis as { __PRERENDER_LANG__?: Lang }).__PRERENDER_LANG__
+
 type ListSectionKey = 'education' | 'work' | 'projects'
 type SectionKey = ListSectionKey | 'skills'
 
@@ -67,7 +69,6 @@ interface ResumeStore {
   removeLink: (id: string) => void
   setTemplateId: (id: string) => void
   setShowIcons: (show: boolean) => void
-  setLang: (lang: Lang) => void
   resetResume: () => void
 }
 
@@ -108,17 +109,12 @@ const appendToSection = (data: ResumeData, section: ListSectionKey): ResumeData 
   }
 }
 
-const keepValue = (key: string, value: unknown) => (key === 'id' ? undefined : value)
-
-const isDefaultResume = (data: ResumeData, lang: Lang): boolean =>
-  JSON.stringify(data, keepValue) === JSON.stringify(defaultResume(lang), keepValue)
-
 export const useResumeStore = create<ResumeStore>()(
   persist(
     (set) => ({
-      resume: defaultResume(detectLanguage()),
+      resume: defaultResume(PRERENDER_LANG ?? detectLanguage()),
       templateId: 'modern',
-      lang: detectLanguage(),
+      lang: PRERENDER_LANG ?? detectLanguage(),
       showIcons: false,
 
       setResume: (resume) => set({ resume }),
@@ -162,11 +158,6 @@ export const useResumeStore = create<ResumeStore>()(
         })),
       setTemplateId: (id) => set({ templateId: id }),
       setShowIcons: (show) => set({ showIcons: show }),
-      setLang: (lang) =>
-        set((s) => ({
-          lang,
-          resume: isDefaultResume(s.resume, s.lang) ? defaultResume(lang) : s.resume,
-        })),
       resetResume: () => set((s) => ({ resume: defaultResume(s.lang) })),
     }),
     {

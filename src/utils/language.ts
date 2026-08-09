@@ -1,6 +1,7 @@
 import type { Lang } from '../types/resume'
 
 export function detectLanguage(): Lang {
+  if (typeof window === 'undefined') return 'zh-CN'
   const host = window.location.hostname
   if (host.includes('jianli')) return 'zh-CN'
   if (host.includes('resume')) return 'en-US'

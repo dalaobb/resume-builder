@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { useI18n } from '../i18n'
 import { useResumeStore } from '../store/useResumeStore'
 import { templates } from '../templates'
@@ -21,12 +20,12 @@ export default function HomePage() {
           {t('home.heroTitle')}
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-sm text-ink-muted md:text-base">{t('home.heroSub')}</p>
-        <Link
-          to="/create"
+        <a
+          href="/create"
           className="mt-8 inline-block rounded-lg bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-accent-dark"
         >
           {t('common.startCreate')}
-        </Link>
+        </a>
       </section>
 
       {/* Features */}
@@ -118,18 +117,18 @@ export default function HomePage() {
         <h2 className="text-2xl font-bold text-ink">{t('home.privacyTitle')}</h2>
         <p className="mx-auto mt-3 max-w-xl text-sm text-ink-muted">{t('home.privacyDesc')}</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link
-            to="/create"
+          <a
+            href="/create"
             className="rounded-lg bg-accent px-8 py-3 text-sm font-semibold text-white transition hover:bg-accent-dark"
           >
             {t('common.startCreate')}
-          </Link>
-          <Link
-            to="/privacy"
+          </a>
+          <a
+            href="/privacy"
             className="rounded-lg border border-line bg-white px-8 py-3 text-sm font-semibold text-ink transition hover:border-accent hover:text-accent-dark"
           >
             {t('common.navPrivacy')}
-          </Link>
+          </a>
         </div>
       </section>
 

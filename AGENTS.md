@@ -122,14 +122,29 @@ Rules:
 
 
 
+MPA structure:
+
+The app is a Vite multi-page app (MPA). Each page is an independent HTML file with its own entry point and static meta:
+
+- `index.html` → home page → `src/entries/home.tsx`
+- `create.html` → editor (SPA) → `src/entries/create.tsx`
+- `privacy.html` → privacy policy → `src/entries/privacy.tsx`
+
+- No client-side router. Navigation uses plain `<a href>` (full page loads). `Header.tsx` computes the active nav state from `window.location.pathname`.
+- `src/components/PageShell.tsx` wraps every page (Header + app-shell div + `applyHtmlLang`). Entries mount `PageShell` + the page; the editor entry also renders `PrintResume` outside the shell.
+- `vite.config.ts` declares the three inputs via `build.rollupOptions.input`.
+- `public/_redirects` maps `/create` → `create.html` and `/privacy` → `privacy.html` (clean URLs).
+
+
+
 SEO:
 
-Per-domain metadata (title, description, canonical, hreflang, Open Graph, Twitter Card, JSON-LD) is injected server-side on Cloudflare Pages by the catch-all Pages Function `functions/[[path]].js`, which replaces the `<!--SEO-->...<!--/SEO-->` block in `index.html` based on the hostname (`jianli` → zh-CN, `resume` → en-US).
+Per-page, per-domain metadata (title, description, canonical, hreflang, Open Graph, Twitter Card, JSON-LD) is injected server-side on Cloudflare Pages by the catch-all Pages Function `functions/[[path]].js`, which replaces the `<!--SEO-->...<!--/SEO-->` block in the served HTML based on the URL path and hostname (`jianli` → zh, `resume` → en; `/` → home, `/create` → editor, `/privacy` → privacy).
 
-- The static default in `index.html` is the zh-CN block (used by local dev and any non-Pages hosting).
+- The static default in each HTML file is the zh-CN block (used by local dev and any non-Pages hosting).
 - `public/og.png` is the social share image (1200x630), regenerated with `pnpm run gen:og` (`scripts/gen-og.js`, devDependency `sharp`).
 - `public/robots.txt` and `public/sitemap.xml` list both domains with hreflang alternates.
-- After editing the SEO block in `index.html`, also update the matching block in `functions/[[path]].js`.
+- After editing a page's SEO block in its HTML file, also update the matching entry in the `SEO` object inside `functions/[[path]].js`.
 
 
 
