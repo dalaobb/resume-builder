@@ -3,6 +3,11 @@ import type { Lang, ResumeBasics } from '../types/resume'
 export const dateRange = (start: string, end: string): string =>
   [start, end].filter(Boolean).join(' - ')
 
+export const buildHeadline = (basics: ResumeBasics): string | null => {
+  if (!basics.title) return null
+  return [basics.title, basics.location].filter(Boolean).join(' · ')
+}
+
 export type ContactKind =
   | 'email'
   | 'phone'

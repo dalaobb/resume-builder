@@ -1,5 +1,5 @@
 import type { Lang, ResumeData } from '../types/resume'
-import { buildContacts, buildPersonal, dateRange } from './shared'
+import { buildContacts, buildHeadline, buildPersonal, dateRange } from './shared'
 import { ContactIcon } from './icons'
 
 function ClassicSection({ title, children }: { title: string; children: React.ReactNode }) {
@@ -21,9 +21,17 @@ export function ClassicPreview({
   showIcons?: boolean
 }) {
   const { basics } = data
-  const contact = [...buildContacts(basics, lang), ...buildPersonal(basics, lang)]
+  const headline = buildHeadline(basics)
+  const contact = [
+    ...buildPersonal(basics, lang).filter((i) => !headline || i.kind !== 'location'),
+    ...buildContacts(basics, lang),
+  ]
 
-  const sections: Array<{ key: string; title: string; render: () => React.ReactNode }> = []
+  const sections: Array<{
+    key: string
+    title: string
+    render: () => React.ReactNode
+  }> = []
   if (basics.summary) {
     sections.push({
       key: 'summary',
@@ -99,7 +107,7 @@ export function ClassicPreview({
     <div className="a4-page">
       <header className="tc-header">
         <h1>{basics.name}</h1>
-        {basics.title && <p className="title">{basics.title}</p>}
+        {headline && <p className="title">{headline}</p>}
         <ul className="tc-contact" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
           {contact.map((item) => (
             <li key={`${item.kind}-${item.value}`}>

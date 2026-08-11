@@ -1,5 +1,5 @@
 import type { Lang, ResumeData } from '../types/resume'
-import { buildContacts, buildPersonal, dateRange } from './shared'
+import { buildContacts, buildHeadline, buildPersonal, dateRange } from './shared'
 import { ContactIcon } from './icons'
 
 export function ModernPreview({
@@ -12,14 +12,15 @@ export function ModernPreview({
   showIcons?: boolean
 }) {
   const { basics } = data
+  const headline = buildHeadline(basics)
   const contact = buildContacts(basics, lang)
-  const personal = buildPersonal(basics, lang)
+  const personal = buildPersonal(basics, lang).filter((i) => !headline || i.kind !== 'location')
 
   return (
     <div className="a4-page">
       <header className="tm-header">
         <h1>{basics.name}</h1>
-        {basics.title && <p className="tm-title">{basics.title}</p>}
+        {headline && <p className="tm-title">{headline}</p>}
         {personal.length > 0 && (
           <ul className="tm-personal">
             {personal.map((item) => (

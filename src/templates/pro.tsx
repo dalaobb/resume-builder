@@ -1,5 +1,5 @@
 import type { Lang, ResumeData } from '../types/resume'
-import { buildContacts, buildPersonal, dateRange } from './shared'
+import { buildContacts, buildHeadline, buildPersonal, dateRange } from './shared'
 import { ContactIcon } from './icons'
 
 function ProSection({ title, children }: { title: string; children: React.ReactNode }) {
@@ -21,10 +21,15 @@ export function ProPreview({
   showIcons?: boolean
 }) {
   const { basics } = data
+  const headline = buildHeadline(basics)
   const contact = buildContacts(basics, lang)
-  const personal = buildPersonal(basics, lang)
+  const personal = buildPersonal(basics, lang).filter((i) => !headline || i.kind !== 'location')
 
-  const sections: Array<{ key: string; title: string; render: () => React.ReactNode }> = []
+  const sections: Array<{
+    key: string
+    title: string
+    render: () => React.ReactNode
+  }> = []
   if (basics.summary) {
     sections.push({
       key: 'summary',
@@ -102,7 +107,20 @@ export function ProPreview({
       <header className="tp-header">
         <div className="tp-id">
           <h1>{basics.name}</h1>
-          {basics.title && <p className="tp-title">{basics.title}</p>}
+          {headline && <p className="tp-title">{headline}</p>}
+          {personal.length > 0 && (
+            <ul
+              className="tp-personal"
+              style={{ listStyle: 'none', margin: '8px 0 0', padding: 0 }}
+            >
+              {personal.map((item) => (
+                <li key={`${item.kind}-${item.value}`}>
+                  <span className="lbl">{item.label}</span>
+                  <span>{item.value}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         {contact.length > 0 && (
           <ul className="tp-contact" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
@@ -122,16 +140,6 @@ export function ProPreview({
           </ul>
         )}
       </header>
-      {personal.length > 0 && (
-        <ul className="tp-personal" style={{ listStyle: 'none', margin: '10px 32px 0', padding: 0 }}>
-          {personal.map((item) => (
-            <li key={`${item.kind}-${item.value}`}>
-              <span className="lbl">{item.label}</span>
-              <span>{item.value}</span>
-            </li>
-          ))}
-        </ul>
-      )}
       <main className="tp-body">
         {sections.map((sec) => (
           <ProSection key={sec.key} title={sec.title}>
