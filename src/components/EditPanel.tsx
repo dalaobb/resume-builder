@@ -71,8 +71,8 @@ const zhFields: BasicFieldDef[] = [
   { key: 'gender', labelKey: 'editor.fieldGender' },
   { key: 'birthDate', labelKey: 'editor.fieldBirthDate' },
   { key: 'nativePlace', labelKey: 'editor.fieldNativePlace' },
-  { key: 'politicalStatus', labelKey: 'editor.fieldPoliticalStatus' },
-  { key: 'expectedSalary', labelKey: 'editor.fieldExpectedSalary' },
+  // { key: 'politicalStatus', labelKey: 'editor.fieldPoliticalStatus' },
+  // { key: 'expectedSalary', labelKey: 'editor.fieldExpectedSalary' },
   { key: 'availableOn', labelKey: 'editor.fieldAvailableOn' },
 ]
 

@@ -15,8 +15,8 @@ export interface ResumeBasics {
   gender: string
   birthDate: string
   nativePlace: string
-  politicalStatus: string
-  expectedSalary: string
+  // politicalStatus: string
+  // expectedSalary: string
   availableOn: string
   links: ResumeLink[]
   summary: string

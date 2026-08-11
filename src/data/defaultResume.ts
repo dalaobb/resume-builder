@@ -19,8 +19,8 @@ function zhSample(): ResumeData {
       gender: '男',
       birthDate: '1995-06',
       nativePlace: '湖南',
-      politicalStatus: '中共党员',
-      expectedSalary: '25-35K',
+      // politicalStatus: '群众',
+      // expectedSalary: '25-35K',
       availableOn: '随时到岗',
       links: [{ id: createId(), label: 'GitHub', url: 'https://github.com/zhangsan' }],
       summary:
@@ -108,8 +108,8 @@ function enSample(): ResumeData {
       gender: '',
       birthDate: '',
       nativePlace: '',
-      politicalStatus: '',
-      expectedSalary: '',
+      // politicalStatus: '',
+      // expectedSalary: '',
       availableOn: '',
       links: [
         { id: createId(), label: 'GitHub', url: 'https://github.com/alexzhang' },

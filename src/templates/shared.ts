@@ -62,8 +62,8 @@ export function buildPersonal(basics: ResumeBasics, lang: Lang): ContactEntry[] 
       ['gender', '性别', basics.gender],
       ['birth', '出生日期', basics.birthDate],
       ['native', '籍贯', basics.nativePlace],
-      ['political', '政治面貌', basics.politicalStatus],
-      ['salary', '期望薪资', basics.expectedSalary],
+      // ['political', '政治面貌', basics.politicalStatus],
+      // ['salary', '期望薪资', basics.expectedSalary],
       ['available', '到岗时间', basics.availableOn],
     ]
     for (const [kind, label, value] of extra) {
