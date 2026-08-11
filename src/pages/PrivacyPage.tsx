@@ -1,5 +1,4 @@
 import { useI18n } from '../i18n'
-import Footer from '../components/Footer'
 
 export default function PrivacyPage() {
   const { t, msg } = useI18n()
@@ -24,7 +23,6 @@ export default function PrivacyPage() {
           {t('privacy.note')}
         </p>
       </div>
-      <Footer />
     </div>
   )
 }

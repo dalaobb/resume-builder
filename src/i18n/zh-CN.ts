@@ -14,6 +14,7 @@ const zhCN = {
     exportPdf: '导出 PDF',
     backHome: '返回首页',
     saving: '已自动保存到本地',
+    footerCopyright: '© {year} 简历制作 · 数据仅保存在你的设备上',
   },
   home: {
     heroTitle: '制作专业简历，就在这里',

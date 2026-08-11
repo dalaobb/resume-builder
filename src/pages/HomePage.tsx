@@ -1,7 +1,6 @@
 import { useI18n } from '../i18n'
 import { useResumeStore } from '../store/useResumeStore'
 import { templates } from '../templates'
-import Footer from '../components/Footer'
 
 export default function HomePage() {
   const { t, lang, msg } = useI18n()
@@ -131,8 +130,6 @@ export default function HomePage() {
           </a>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

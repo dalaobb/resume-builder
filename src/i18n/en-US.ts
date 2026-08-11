@@ -14,6 +14,7 @@ const enUS = {
     exportPdf: 'Export PDF',
     backHome: 'Back to Home',
     saving: 'Auto-saved locally',
+    footerCopyright: '© {year} Resume Builder · Your data stays on your device',
   },
   home: {
     heroTitle: 'Build a professional resume, right here',
