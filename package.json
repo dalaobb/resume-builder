@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "oxlint",
     "preview": "vite preview",
-    "gen:og": "node scripts/gen-og.js"
+    "gen:og": "node scripts/gen-og.js",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "react": "^19.2.8",

@@ -17,8 +17,8 @@ const zhCN = {
     footerCopyright: '© {year} 简历制作 · 数据仅保存在你的设备上',
   },
   home: {
-    heroTitle: '制作专业简历，就在这里',
-    heroSub: '免费在线简历制作工具，无需注册、无需上传，所有数据仅保存在你自己的设备上。',
+    heroTitle: '免费在线简历制作，一键导出PDF',
+    heroSub: '专业个人简历模板，支持中文简历与英文简历，实时预览，无需注册、无需上传，数据仅保存在你的设备上。',
     featuresTitle: '核心特性',
     features: [
       {

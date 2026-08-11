@@ -17,9 +17,9 @@ const enUS = {
     footerCopyright: '© {year} Resume Builder · Your data stays on your device',
   },
   home: {
-    heroTitle: 'Build a professional resume, right here',
+    heroTitle: 'Build a professional resume, free',
     heroSub:
-      'A free online resume builder. No sign-up, no upload — all your data stays on your own device.',
+      'A free online resume builder with ATS-friendly templates. Live preview and PDF export. No sign-up, no upload — all your data stays on your own device.',
     featuresTitle: 'Key Features',
     features: [
       {
