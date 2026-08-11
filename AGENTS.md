@@ -542,7 +542,8 @@ Check:
 - `pnpm run typecheck` — TypeScript check (`tsc --noEmit`)
 - `pnpm run lint` — oxlint (config in `.oxlintrc.json`)
 - `pnpm run build` — production build (Vite + Tailwind v4)
-- `pnpm run gen:og` — regenerate `public/og.png` (social share image, `scripts/gen-og.js`, devDependency `sharp`)
+
+Formatting: `.prettierrc` matches the codebase style (single quotes, trailing commas, printWidth 100). When editing, keep edits Prettier-compatible so `format on save` (VSCode Prettier) produces no extra diff.- `pnpm run gen:og` — regenerate `public/og.png` (social share image, `scripts/gen-og.js`, devDependency `sharp`)
 - `pnpm run indexnow` — ping IndexNow after deploy (submits both domains' `/`, `/create`, `/privacy`; key file `public/{key}.txt` served on both domains)
 
 Verify order: `typecheck` → `lint` → `build`. There is no test framework.
