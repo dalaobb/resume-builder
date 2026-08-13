@@ -132,7 +132,10 @@ const enUS = {
     items: [
       { title: 'No accounts', desc: 'No registration, no login, and no identity data is collected.' },
       { title: 'No data upload', desc: 'Your resume is stored only in localStorage and never uploaded.' },
-      { title: 'No analytics', desc: 'No tracking or analytics scripts are deployed. No user profiling.' },
+      {
+        title: 'Anonymous analytics',
+        desc: 'We use Google Analytics for anonymous, aggregated visit statistics. No identity tracking; resume content is never collected or uploaded.',
+      },
       { title: 'Local export', desc: 'PDF export happens entirely on your device.' },
     ],
     note: 'Avoid storing sensitive information on shared computers. Clearing browser data removes local resumes.',

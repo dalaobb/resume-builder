@@ -92,23 +92,23 @@ const SEO = {
     zh: {
       title: '隐私政策 - 在线简历制作',
       description:
-        '在线简历制作隐私政策：无需注册、无需上传，所有简历数据仅保存在您的浏览器本地，本工具不收集任何个人数据。',
+        '在线简历制作隐私政策：无需注册、无需上传，所有简历数据仅保存在您的浏览器本地；仅使用 Google Analytics 匿名统计页面访问。',
       keywords: '隐私政策,简历制作,简历数据安全,本地存储',
       siteName: '简历制作',
       siteNameAlt: 'Resume Builder',
       ogTitle: '隐私政策 - 在线简历制作',
-      ogDescription: '无需注册、无需上传，简历数据仅保存在本地，本工具不收集任何个人数据。',
+      ogDescription: '无需注册、无需上传，简历数据仅保存在本地；仅使用 Google Analytics 匿名统计访问量。',
     },
     en: {
       title: 'Privacy Policy - Resume Builder',
       description:
-        'Resume Builder privacy policy: no sign-up, no upload, no tracking. All resume data stays in your browser and is never transmitted.',
+        'Resume Builder privacy policy: no sign-up, no upload. Resume data stays in your browser; we only use Google Analytics for anonymous, aggregated visit statistics.',
       keywords: 'privacy policy,resume builder,data safety,local storage',
       siteName: 'Resume Builder',
       siteNameAlt: '简历制作',
       ogTitle: 'Privacy Policy - Resume Builder',
       ogDescription:
-        'No sign-up, no upload, no tracking. Resume data stays in your browser and is never transmitted.',
+        'No sign-up, no upload. Resume data stays in your browser; only anonymous Google Analytics visit statistics are collected.',
     },
   },
 }
