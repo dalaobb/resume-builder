@@ -146,7 +146,7 @@ Per-page, per-domain metadata (title, description, canonical, hreflang, Open Gra
 - Template pages are reachable at clean URLs `/template/modern`, `/template/classic`, `/template/pro`; `/create?template=modern` (etc.) preselects a template in the editor.
 - The static default in each HTML file is the zh-CN block (used by local dev and any non-Pages hosting).
 - `public/og.png` is the social share image (1200x630), regenerated with `pnpm run gen:og` (`scripts/gen-og.js`, devDependency `sharp`).
-- `public/robots.txt` and `public/sitemap.xml` list both domains with hreflang alternates.
+- `public/robots.txt` points to `/sitemap.xml`; the sitemap is generated into `dist/` at build time from git history (`scripts/gen-sitemap.mjs`). When adding a new page, add an entry to its `pages` array (matching `seo-data.mjs` and the MPA/prerender wiring).
 - After editing a page's SEO block in its HTML file, also update the matching entry in the `SEO` object inside `functions/seo-data.mjs`.
 
 
@@ -544,7 +544,8 @@ Check:
 - `pnpm run dev` — dev server
 - `pnpm run typecheck` — TypeScript check (`tsc --noEmit`)
 - `pnpm run lint` — oxlint (config in `.oxlintrc.json`)
-- `pnpm run build` — production build (Vite + Tailwind v4)
+- `pnpm run build` — production build (Vite + Tailwind v4, then sitemap generation + prerender)
+- `pnpm run gen:sitemap` — regenerate `dist/sitemap.xml` from git history (`scripts/gen-sitemap.mjs`; `lastmod` is the latest commit date touching each page's source files; runs automatically inside `build`)
 
 Formatting: `.prettierrc` matches the codebase style (single quotes, trailing commas, printWidth 100). When editing, keep edits Prettier-compatible so `format on save` (VSCode Prettier) produces no extra diff.- `pnpm run gen:og` — regenerate `public/og.png` (social share image, `scripts/gen-og.js`, devDependency `sharp`)
 - `pnpm run indexnow` — ping IndexNow after deploy (submits both domains' `/`, `/create`, `/privacy`; key file `public/{key}.txt` served on both domains)

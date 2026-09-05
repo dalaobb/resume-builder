@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/prerender.mjs",
+    "build": "vite build && node scripts/gen-sitemap.mjs && node scripts/prerender.mjs",
     "prerender": "node scripts/prerender.mjs",
+    "gen:sitemap": "node scripts/gen-sitemap.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint",
     "preview": "vite preview",
