@@ -1,10 +1,12 @@
 import { spawnSync } from 'node:child_process'
+import { existsSync } from 'node:fs'
 import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const dist = path.join(root, 'dist')
+const outFile = path.join(root, 'public', 'sitemap.xml')
 const HOSTS = { zh: 'https://jianli.dalaobb.com', en: 'https://resume.dalaobb.com' }
 const TAGS = { zh: 'zh-CN', en: 'en-US' }
 
@@ -40,21 +42,30 @@ const pages = [
   })),
 ]
 
-function lastModified(files) {
-  const res = spawnSync('git', ['log', '-1', '--format=%cs', '--', ...files], { cwd: root, encoding: 'utf8' })
-  if (res.status === 0 && res.stdout.trim()) return res.stdout.trim()
-  const head = spawnSync('git', ['log', '-1', '--format=%cs'], { cwd: root, encoding: 'utf8' })
-  if (head.status === 0 && head.stdout.trim()) return head.stdout.trim()
-  return new Date().toISOString().slice(0, 10)
+function run(args) {
+  return spawnSync('git', args, { cwd: root, encoding: 'utf8' })
 }
 
-const alt = (loc, tag) =>
-  `<xhtml:link rel="alternate" hreflang="${TAGS[tag]}" href="${HOSTS[tag]}${loc}" />`
+const insideGit = run(['rev-parse', '--is-inside-work-tree'])
+if (insideGit.status !== 0) {
+  console.log('no git history available - keeping committed public/sitemap.xml as-is')
+} else {
+  function lastModified(files) {
+    const res = run(['log', '-1', '--format=%cs', '--', ...files])
+    if (res.status === 0 && res.stdout.trim()) return res.stdout.trim()
+    const head = run(['log', '-1', '--format=%cs'])
+    return head.status === 0 && head.stdout.trim() ? head.stdout.trim() : new Date().toISOString().slice(0, 10)
+  }
 
-function urlEntry(lang, page) {
-  const { page: loc, priority, changefreq, date } = page
-  const other = lang === 'zh' ? 'en' : 'zh'
-  return `  <url>
+  for (const page of pages) page.date = lastModified(page.files)
+
+  const alt = (loc, tag) =>
+    `<xhtml:link rel="alternate" hreflang="${TAGS[tag]}" href="${HOSTS[tag]}${loc}" />`
+
+  function urlEntry(lang, page) {
+    const { page: loc, priority, changefreq, date } = page
+    const other = lang === 'zh' ? 'en' : 'zh'
+    return `  <url>
     <loc>${HOSTS[lang]}${loc}</loc>
     <lastmod>${date}</lastmod>
     <changefreq>${changefreq}</changefreq>
@@ -63,17 +74,20 @@ function urlEntry(lang, page) {
     ${alt(loc, other)}
     <xhtml:link rel="alternate" hreflang="x-default" href="${HOSTS.en}${loc}" />
   </url>`
-}
+  }
 
-for (const page of pages) page.date = lastModified(page.files)
-
-const xml = `<?xml version="1.0" encoding="UTF-8"?>
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${pages.flatMap((p) => [urlEntry('zh', p), urlEntry('en', p)]).join('\n')}
 </urlset>
 `
 
-await mkdir(dist, { recursive: true })
-await writeFile(path.join(dist, 'sitemap.xml'), xml)
-for (const page of pages) console.log(`sitemap ${page.page} -> ${page.date}`)
-console.log(`written ${path.join(dist, 'sitemap.xml')}`)
+  await mkdir(path.dirname(outFile), { recursive: true })
+  await writeFile(outFile, xml)
+  console.log(`regenerated ${path.relative(root, outFile)}`)
+  if (existsSync(dist)) {
+    await writeFile(path.join(dist, 'sitemap.xml'), xml)
+    console.log(`copied to dist/sitemap.xml`)
+  }
+  for (const page of pages) console.log(`sitemap ${page.page} -> ${page.date}`)
+}
