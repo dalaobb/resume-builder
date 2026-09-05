@@ -72,6 +72,17 @@ ${body}
     await writeFile(path.join(outDir, job.out), html)
     console.log(`prerendered dist/${lang}/${job.out}`)
   }
+
+  const seoBlock = /<!--SEO-->[\s\S]*?<!--\/SEO-->/
+  const createSrc = await readFile(path.join(dist, 'create.html'), 'utf8')
+  for (const l of ['zh', 'en']) {
+    await mkdir(path.join(dist, l), { recursive: true })
+    const out = createSrc
+      .replace('lang="zh-CN"', `lang="${l === 'zh' ? 'zh-CN' : 'en-US'}"`)
+      .replace(seoBlock, buildHead('/create', l))
+    await writeFile(path.join(dist, l, 'create.html'), out)
+    console.log(`prerendered dist/${l}/create.html`)
+  }
 } finally {
   await vite.close()
 }

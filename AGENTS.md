@@ -142,7 +142,7 @@ SEO:
 
 Per-page, per-domain metadata (title, description, canonical, hreflang, Open Graph, Twitter Card, JSON-LD) is injected server-side on Cloudflare Pages by the catch-all Pages Function `functions/[[path]].js`, which replaces the `<!--SEO-->...<!--/SEO-->` block in the served HTML based on the URL path and hostname (`jianli` → zh, `resume` → en; `/` → home, `/create` → editor, `/privacy` → privacy, `/template/{modern,classic,pro}` → template landing pages).
 
-- Home, privacy and the three template pages are prerendered to static HTML per language (`scripts/prerender.mjs` → `dist/zh|en/*.html`); the Pages Function injects GA into those. The editor page is served from `create.html` with its SEO block replaced live per language.
+- Home, privacy, the editor (`/create`) and the three template pages are prerendered to static HTML per language (`scripts/prerender.mjs` → `dist/zh|en/*.html`); the Pages Function injects GA into those.
 - Template pages are reachable at clean URLs `/template/modern`, `/template/classic`, `/template/pro`; `/create?template=modern` (etc.) preselects a template in the editor.
 - The static default in each HTML file is the zh-CN block (used by local dev and any non-Pages hosting).
 - `public/og.png` is the social share image (1200x630), regenerated with `pnpm run gen:og` (`scripts/gen-og.js`, devDependency `sharp`).
