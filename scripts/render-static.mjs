@@ -24,14 +24,23 @@ try {
   const { default: PageShell } = await vite.ssrLoadModule('/src/components/PageShell.tsx')
   const { default: HomePage } = await vite.ssrLoadModule('/src/pages/HomePage.tsx')
   const { default: PrivacyPage } = await vite.ssrLoadModule('/src/pages/PrivacyPage.tsx')
+  const { default: TemplatePage } = await vite.ssrLoadModule('/src/pages/TemplatePage.tsx')
 
   const assetsDir = path.join(dist, 'assets')
   const cssFiles = (await readdir(assetsDir)).filter((f) => f.endsWith('.css')).sort()
   const css = (await Promise.all(cssFiles.map((f) => readFile(path.join(assetsDir, f), 'utf8')))).join('\n')
 
+  const templateIds = ['modern', 'classic', 'pro']
   const jobs = [
     { page: '/', out: 'index.html', Component: HomePage },
     { page: '/privacy', out: 'privacy.html', Component: PrivacyPage },
+    ...templateIds.map((id) => ({
+      page: `/template/${id}`,
+      out: `template-${id}.html`,
+      Component: function TemplateWrapper() {
+        return React.createElement(TemplatePage, { templateId: id })
+      },
+    })),
   ]
 
   for (const job of jobs) {

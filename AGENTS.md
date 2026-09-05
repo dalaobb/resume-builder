@@ -129,22 +129,25 @@ The app is a Vite multi-page app (MPA). Each page is an independent HTML file wi
 - `index.html` → home page → `src/entries/home.tsx`
 - `create.html` → editor (SPA) → `src/entries/create.tsx`
 - `privacy.html` → privacy policy → `src/entries/privacy.tsx`
+- `template-modern.html` / `template-classic.html` / `template-pro.html` → template landing pages (one per resume template) → `src/entries/template-{id}.tsx` → shared `src/pages/TemplatePage.tsx`
 
 - No client-side router. Navigation uses plain `<a href>` (full page loads). `Header.tsx` computes the active nav state from `window.location.pathname`.
 - `src/components/PageShell.tsx` wraps every page (Header + app-shell div + `applyHtmlLang`). Entries mount `PageShell` + the page; the editor entry also renders `PrintResume` outside the shell.
-- `vite.config.ts` declares the three inputs via `build.rollupOptions.input`.
+- `vite.config.ts` declares each page input via `build.rollupOptions.input`.
 - `public/_redirects` maps `/create` → `create.html` and `/privacy` → `privacy.html` (clean URLs).
 
 
 
 SEO:
 
-Per-page, per-domain metadata (title, description, canonical, hreflang, Open Graph, Twitter Card, JSON-LD) is injected server-side on Cloudflare Pages by the catch-all Pages Function `functions/[[path]].js`, which replaces the `<!--SEO-->...<!--/SEO-->` block in the served HTML based on the URL path and hostname (`jianli` → zh, `resume` → en; `/` → home, `/create` → editor, `/privacy` → privacy).
+Per-page, per-domain metadata (title, description, canonical, hreflang, Open Graph, Twitter Card, JSON-LD) is injected server-side on Cloudflare Pages by the catch-all Pages Function `functions/[[path]].js`, which replaces the `<!--SEO-->...<!--/SEO-->` block in the served HTML based on the URL path and hostname (`jianli` → zh, `resume` → en; `/` → home, `/create` → editor, `/privacy` → privacy, `/template/{modern,classic,pro}` → template landing pages).
 
+- Home, privacy and the three template pages are prerendered to static HTML per language (`scripts/prerender.mjs` → `dist/zh|en/*.html`); the Pages Function injects GA into those. The editor page is served from `create.html` with its SEO block replaced live per language.
+- Template pages are reachable at clean URLs `/template/modern`, `/template/classic`, `/template/pro`; `/create?template=modern` (etc.) preselects a template in the editor.
 - The static default in each HTML file is the zh-CN block (used by local dev and any non-Pages hosting).
 - `public/og.png` is the social share image (1200x630), regenerated with `pnpm run gen:og` (`scripts/gen-og.js`, devDependency `sharp`).
 - `public/robots.txt` and `public/sitemap.xml` list both domains with hreflang alternates.
-- After editing a page's SEO block in its HTML file, also update the matching entry in the `SEO` object inside `functions/[[path]].js`.
+- After editing a page's SEO block in its HTML file, also update the matching entry in the `SEO` object inside `functions/seo-data.mjs`.
 
 
 

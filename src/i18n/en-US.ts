@@ -24,6 +24,52 @@ const enUS = {
       'Your resume editing stays on your own device: everything is auto-saved to your browser’s localStorage, so you can close the tab and pick up right where you left off.',
     ],
   },
+  landing: {
+    more: 'More resume templates',
+    useThis: 'Use this template',
+    freeNote: 'Free · No sign-up · PDF export',
+    previewNote: 'The sample resume above is set in the {name} layout.',
+    suitedTitle: 'Who it suits',
+    modern: {
+      heading: 'Modern Resume Template',
+      lead: 'A clean, two-column resume layout with a bold header, a slim green accent, and a side column for skills, education and contact.',
+      paras: [
+        'The modern template is built to be scanned quickly. Your experience and projects live in the wide main column where recruiters look first, while skills and education sit in a quiet side column so they never compete for attention.',
+        'Everything is designed around the resume itself: standard A4, selectable text, print-friendly and ATS-safe. Edit every word with our online resume builder, watch a live preview, switch templates any time and export a clean PDF — all in your browser, with no sign-up and no upload.',
+      ],
+      suited: [
+        'Product, design, engineering and tech roles',
+        'Candidates with a strong skills or side-project section',
+        'Anyone who prefers a modern, scannable layout',
+      ],
+    },
+    classic: {
+      heading: 'Classic Resume Template',
+      lead: 'A timeless single-column resume layout with a centered header and clean section rules — formal, readable and universally accepted.',
+      paras: [
+        'The classic template keeps a conventional structure: name and contact centered at the top, with education, experience and skills flowing down a single column. It reads naturally to both people and ATS software, making it a safe choice for formal applications.',
+        'It is still a fully editable resume template — add your details, preview live, and export an A4 PDF. No sign-up, no upload, and your data never leaves your device.',
+      ],
+      suited: [
+        'Finance, education, HR, legal and government roles',
+        'Formal applications where a traditional layout is expected',
+        'First-time job seekers and more conservative industries',
+      ],
+    },
+    pro: {
+      heading: 'Pro Resume Template',
+      lead: 'An executive-style resume template with a compact top bar, accent-marked section titles and skills displayed as clean tags.',
+      paras: [
+        'The pro template puts leadership and results front and center. Your name and title sit beside a tight contact block, sections are signposted with a bold accent rule, and skills read as neat tags instead of bars or stars — so an ATS parses them reliably.',
+        'Built for experienced and senior candidates, it keeps a strong hierarchy on a single A4 page: edit online, preview live, and export a print-ready PDF in your browser. Free, no sign-up, 100% local.',
+      ],
+      suited: [
+        'Senior, management and leadership applications',
+        'Experienced candidates with measurable results to highlight',
+        'Profiles applying through ATS and job portals',
+      ],
+    },
+  },
   home: {
     heroTitle: 'Create a professional resume online — free, no sign-up',
     heroSub:
@@ -49,6 +95,7 @@ const enUS = {
     ],
     templatesTitle: 'Pick a template',
     templatesDesc: 'Switching templates only changes layout and colors, never your content.',
+    templateDetailAria: 'template page',
     howTitle: 'Three steps',
     how: [
       { title: 'Fill in your info', desc: 'Enter basics, experience and skills.' },

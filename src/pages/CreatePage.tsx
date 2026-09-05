@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useI18n } from '../i18n'
 import EditPanel from '../components/EditPanel'
 import PreviewPane from '../components/PreviewPane'
@@ -6,6 +6,7 @@ import TemplateSelector from '../components/TemplateSelector'
 import ExportPanel from '../components/ExportPanel'
 import { usePdfExport } from '../components/usePdfExport'
 import { useResumeStore } from '../store/useResumeStore'
+import { templates } from '../templates'
 
 type Step = 'edit' | 'preview' | 'export'
 
@@ -20,6 +21,12 @@ export default function CreatePage() {
   const [step, setStep] = useState<Step>('edit')
   const { handleExport } = usePdfExport()
   const resetResume = useResumeStore((s) => s.resetResume)
+  const setTemplateId = useResumeStore((s) => s.setTemplateId)
+
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get('template')
+    if (id && templates.some((t) => t.id === id)) setTemplateId(id)
+  }, [setTemplateId])
 
   const handleReset = () => {
     if (window.confirm(t('editor.resetConfirm'))) resetResume()

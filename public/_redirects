@@ -1,0 +1,3 @@
+/create      /create.html     200
+/privacy     /privacy.html    200
+/template/*  /template-:splat.html  200

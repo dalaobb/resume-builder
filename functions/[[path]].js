@@ -47,6 +47,14 @@ export async function onRequest(context) {
     return new Response(out, { status: res.status, headers: stripLength(res.headers) })
   }
 
+  const templateMatch = /^template\/(modern|classic|pro)$/.exec(page)
+  if (templateMatch) {
+    const res = await env.ASSETS.fetch(new URL(`/${lang}/template-${templateMatch[1]}.html`, request.url))
+    if (!res.ok || !gaId) return res
+    const html = await res.text()
+    return new Response(injectGa(html, gaId), { status: res.status, headers: stripLength(res.headers) })
+  }
+
   if (page === 'index' || page === 'privacy') {
     const res = await env.ASSETS.fetch(new URL(`/${lang}/${page}.html`, request.url))
     if (!res.ok || !gaId) return res

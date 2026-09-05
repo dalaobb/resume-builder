@@ -59,7 +59,13 @@ export default function HomePage() {
                     </div>
                   </div>
                   <div className="border-t border-line p-3 text-center text-sm font-medium text-ink">
-                    {t(tmpl.nameKey)}
+                    <a
+                      href={`/template/${tmpl.id}`}
+                      className="transition hover:text-accent-dark"
+                      aria-label={`${t(tmpl.nameKey)} ${msg.home.templateDetailAria}`}
+                    >
+                      {t(tmpl.nameKey)}
+                    </a>
                   </div>
                 </div>
               )

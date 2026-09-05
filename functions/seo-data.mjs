@@ -112,6 +112,78 @@ const SEO = {
         'No sign-up, no upload. Resume data stays in your browser; only anonymous Google Analytics visit statistics are collected.',
     },
   },
+  '/template/modern': {
+    zh: {
+      title: '现代简历模板 - 免费在线编辑，无需注册',
+      description:
+        '免费现代简历模板：两栏式左右排版、侧栏展示技能与教育经历，在线编辑、实时预览、一键导出高清 PDF。无需注册、无需上传，简历数据仅保存在本地。',
+      keywords: '现代简历模板,现代简约简历模板,免费简历模板,在线简历制作,简历编辑器,一键导出PDF,无需注册',
+      siteName: '简历制作',
+      siteNameAlt: 'Resume Builder',
+      ogTitle: '现代简历模板 - 免费在线编辑',
+      ogDescription: '免费现代简历模板，两栏式排版，实时预览、一键导出 PDF，无需注册、数据仅保存在本地。',
+    },
+    en: {
+      title: 'Modern Resume Template - Edit Online Free, No Sign-up',
+      description:
+        'Modern two-column resume template for product, design and tech roles. Edit it online free with live preview and PDF export - no sign-up, 100% local.',
+      keywords:
+        'modern resume template,modern resume templates free,online resume builder,free resume editor,ATS-friendly resume template,no sign-up,PDF export',
+      siteName: 'Resume Builder',
+      siteNameAlt: '简历制作',
+      ogTitle: 'Modern Resume Template - Edit Online Free',
+      ogDescription:
+        'Modern two-column resume template with live preview and PDF export. No sign-up - your data stays on your device.',
+    },
+  },
+  '/template/classic': {
+    zh: {
+      title: '经典简历模板 - 免费在线编辑，无需注册',
+      description:
+        '免费经典简历模板：居中单栏版式、正式稳重，适合传统行业与正式投递；在线编辑、实时预览、一键导出高清 PDF，无需注册、数据仅保存在本地。',
+      keywords: '经典简历模板,传统简历模板,单栏简历模板,免费简历模板,在线简历制作,一键导出PDF,无需注册',
+      siteName: '简历制作',
+      siteNameAlt: 'Resume Builder',
+      ogTitle: '经典简历模板 - 免费在线编辑',
+      ogDescription: '免费经典简历模板，单栏居中版式、正式稳重，实时预览、一键导出 PDF，无需注册、数据仅保存在本地。',
+    },
+    en: {
+      title: 'Classic Resume Template - Edit Online Free, No Sign-up',
+      description:
+        'Formal single-column classic resume template for finance, education, HR and government roles. Edit it online free with live preview and PDF export - no sign-up, 100% local.',
+      keywords:
+        'classic resume template,traditional resume template,single column resume template,free resume template,online resume builder,ATS-friendly,no sign-up,PDF export',
+      siteName: 'Resume Builder',
+      siteNameAlt: '简历制作',
+      ogTitle: 'Classic Resume Template - Edit Online Free',
+      ogDescription:
+        'Formal single-column classic resume template with live preview and PDF export. No sign-up - your data stays on your device.',
+    },
+  },
+  '/template/pro': {
+    zh: {
+      title: '高级简历模板 - 免费在线编辑，无需注册',
+      description:
+        '免费高级简历模板：商务专业风、突出管理与项目成果，适合资深与管理级求职者；在线编辑、实时预览、一键导出高清 PDF，无需注册、数据仅保存在本地。',
+      keywords: '高级简历模板,商务简历模板,专业简历模板,免费简历模板,在线简历制作,一键导出PDF,无需注册',
+      siteName: '简历制作',
+      siteNameAlt: 'Resume Builder',
+      ogTitle: '高级简历模板 - 免费在线编辑',
+      ogDescription: '免费高级简历模板，商务专业风、突出管理与项目成果，实时预览、一键导出 PDF，无需注册、数据仅保存在本地。',
+    },
+    en: {
+      title: 'Pro Resume Template - Edit Online Free, No Sign-up',
+      description:
+        'Executive-style pro resume template that highlights leadership and results. Edit it online free with live preview and PDF export - no sign-up, 100% local.',
+      keywords:
+        'pro resume template,professional resume template,executive resume template,senior resume template,online resume builder,ATS-friendly,no sign-up,PDF export',
+      siteName: 'Resume Builder',
+      siteNameAlt: '简历制作',
+      ogTitle: 'Pro Resume Template - Edit Online Free',
+      ogDescription:
+        'Executive-style pro resume template with live preview and PDF export. No sign-up - your data stays on your device.',
+    },
+  },
 }
 
 function faqSchema(page, lang) {
@@ -135,6 +207,17 @@ function softwareSchema(page, lang) {
   const name = JSON.stringify(d.siteName)
   return `<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":${name},"alternateName":${JSON.stringify(d.siteNameAlt)},"applicationCategory":"BusinessApplication","operatingSystem":"Web","inLanguage":["zh-CN","en-US"],"url":${JSON.stringify(url)},"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"}}
+</script>
+`
+}
+
+function breadcrumbSchema(page, lang) {
+  if (!page.startsWith('/template/')) return ''
+  const d = SEO[page][lang]
+  const home = DOMAINS[lang] + '/'
+  const url = DOMAINS[lang] + page
+  return `<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":${JSON.stringify(d.siteName)},"item":${JSON.stringify(home)}},{"@type":"ListItem","position":2,"name":${JSON.stringify(d.title)},"item":${JSON.stringify(url)}}]}
 </script>
 `
 }
@@ -173,5 +256,5 @@ export function buildHead(page, lang) {
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"${d.siteName}","alternateName":"${d.siteNameAlt}","url":"${url}"}
 </script>
-${faqSchema(page, lang)}${softwareSchema(page, lang)}`
+${faqSchema(page, lang)}${softwareSchema(page, lang)}${breadcrumbSchema(page, lang)}`
 }
