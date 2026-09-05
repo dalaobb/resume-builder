@@ -16,7 +16,7 @@ const stepItems: Array<{ id: Step; key: string }> = [
 ]
 
 export default function CreatePage() {
-  const { t } = useI18n()
+  const { t, msg } = useI18n()
   const [step, setStep] = useState<Step>('edit')
   const { handleExport } = usePdfExport()
   const resetResume = useResumeStore((s) => s.resetResume)
@@ -26,8 +26,9 @@ export default function CreatePage() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] flex-col">
-      {/* 工具栏 */}
+    <>
+      <div className="flex h-[calc(100vh-4rem)] flex-col">
+        {/* 工具栏 */}
       <div className="shrink-0 border-b border-line bg-white">
         <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-2.5 md:px-5">
           <span className="text-xs text-ink-faint lg:hidden">{t(stepItems.find((i) => i.id === step)?.key ?? stepItems[0].key)}</span>
@@ -96,6 +97,16 @@ export default function CreatePage() {
         {step === 'preview' && <PreviewPane />}
         {step === 'export' && <ExportPanel />}
       </div>
-    </div>
+      </div>
+
+      <section className="mx-auto max-w-3xl px-4 py-10 text-center md:py-12">
+        <h1 className="text-xl font-bold text-ink md:text-2xl">{t('seo.createHeading')}</h1>
+        <div className="mt-4 space-y-3 text-sm leading-relaxed text-ink-muted">
+          {msg.seo.createPara.map((p) => (
+            <p key={p}>{p}</p>
+          ))}
+        </div>
+      </section>
+    </>
   )
 }

@@ -53,16 +53,16 @@ const SEO = {
       ogDescription: '专业个人简历模板，实时预览，一键导出PDF。无需注册、无需上传，数据仅保存在本地。',
     },
     en: {
-      title: 'Resume Builder - Free Resume Templates, No Sign-up, 100% Local',
+      title: 'Resume Builder Online - Free Resume Editor, No Sign-up',
       description:
-        'Free online resume maker with professional ATS-friendly resume templates. Live preview and PDF export. No sign-up, no upload - your data never leaves your browser.',
+        'Create a resume online free with a professional ATS-friendly resume builder. Edit your resume online, preview live, and export a clean PDF - no sign-up, no upload, 100% local.',
       keywords:
-        'resume builder,resume templates,free resume maker,online resume editor,CV builder,ATS-friendly,no sign-up,PDF export',
+        'resume builder online,online resume builder,edit resume online,create resume online free,resume templates,free resume maker,online resume editor,ATS-friendly,no sign-up,PDF export',
       siteName: 'Resume Builder',
       siteNameAlt: '简历制作',
-      ogTitle: 'Resume Builder - Free Resume Templates, 100% Local',
+      ogTitle: 'Resume Builder Online - Free Resume Editor',
       ogDescription:
-        'Professional ATS-friendly resume templates, live preview, and PDF export. No sign-up, no upload - your data stays on your device.',
+        'Create a resume online free with professional ATS-friendly templates, live preview and PDF export. No sign-up - your data stays on your device.',
     },
   },
   '/create': {
@@ -77,15 +77,16 @@ const SEO = {
       ogDescription: '自由编辑、实时预览、一键导出PDF。支持中英文简历与多套模板，数据仅保存在本地。',
     },
     en: {
-      title: 'Resume Builder - Free Online Editor, No Sign-up, 100% Local',
+      title: 'Edit Resume Online - Free Resume Editor, No Sign-up',
       description:
-        'Build a professional resume online. Edit freely, preview live, and export to PDF. ATS-friendly templates in multiple styles. No sign-up - your data stays on your device.',
-      keywords: 'resume editor,resume maker,free resume templates,ATS-friendly,online resume,PDF export,no sign-up',
+        'Edit your resume online for free. ATS-friendly resume templates, live preview and one-click A4 PDF export. No sign-up, no upload - your resume data stays on your device.',
+      keywords:
+        'edit resume online,resume editing online,resume editor,online resume builder,free resume maker,resume templates,ATS-friendly,PDF export,no sign-up',
       siteName: 'Resume Builder',
       siteNameAlt: '简历制作',
-      ogTitle: 'Resume Builder - Free Online Editor, 100% Local',
+      ogTitle: 'Edit Resume Online - Free Resume Editor',
       ogDescription:
-        'Edit freely, preview live, and export to PDF. ATS-friendly templates in multiple styles. Your data stays on your device.',
+        'Edit your resume online for free with ATS-friendly templates, live preview and PDF export. No sign-up - your data stays on your device.',
     },
   },
   '/privacy': {

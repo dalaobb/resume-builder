@@ -10,14 +10,22 @@ const enUS = {
     navHome: 'Home',
     navCreate: 'Create',
     navPrivacy: 'Privacy',
-    startCreate: 'Start Building',
+    startCreate: 'Create Resume Online',
     exportPdf: 'Export PDF',
     backHome: 'Back to Home',
     saving: 'Auto-saved locally',
     footerCopyright: '© {year} Resume Builder · Your data stays on your device',
   },
+  seo: {
+    createHeading: 'Create and edit your resume online — free',
+    createPara: [
+      'Resume Builder is a free online resume builder that runs entirely in your browser. Pick an ATS-friendly resume template, type your details into the editor, and watch a live preview update as you go.',
+      'When your resume is ready, export a clean A4 PDF with selectable text straight from the print dialog — ideal for emailing recruiters or uploading to job portals. No account, no upload, no watermark.',
+      'Your resume editing stays on your own device: everything is auto-saved to your browser’s localStorage, so you can close the tab and pick up right where you left off.',
+    ],
+  },
   home: {
-    heroTitle: 'Build a professional resume, free',
+    heroTitle: 'Create a professional resume online — free, no sign-up',
     heroSub:
       'A free online resume builder with ATS-friendly templates. Live preview and PDF export. No sign-up, no upload — all your data stays on your own device.',
     featuresTitle: 'Key Features',
